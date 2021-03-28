@@ -1,0 +1,7 @@
+{
+  "name": "monster-game",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
