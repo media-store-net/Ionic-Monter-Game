@@ -2,27 +2,40 @@
   <ion-page>
     <ion-header>
       <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
+        <ion-title>
+          <header>
+            <h1>Monster Slayer</h1>
+          </header>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
+          <ion-title size="large">Monster Game</ion-title>
         </ion-toolbar>
       </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
+
+      <monster-game/>
     </ion-content>
   </ion-page>
 </template>
 
 <script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+import {defineComponent} from 'vue';
+import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/vue';
+import MonsterGame from "@/components/MonsterGame.vue";
 
-export default  {
+export default defineComponent({
   name: 'Tab1',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
-}
+  components: {MonsterGame, IonHeader, IonToolbar, IonTitle, IonContent, IonPage}
+})
 </script>
+<style scoped>
+header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  padding: 0.5rem;
+  color: #880017;
+  text-align: center;
+}
+</style>

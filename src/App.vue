@@ -16,3 +16,16 @@ export default defineComponent({
   }
 });
 </script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Jost', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
