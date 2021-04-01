@@ -49,9 +49,13 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 import {defineComponent} from 'vue';
 import getRandomValue from "../fn/getRandomValue";
+
+interface StylesOutput {
+  width: string;
+}
 
 export default defineComponent({
   name: "MonsterGame",
@@ -65,24 +69,24 @@ export default defineComponent({
     };
   },
   computed: {
-    monsterBarStyles() {
+    monsterBarStyles(): StylesOutput {
       if (this.monsterHealth < 0) {
         return {width: '0%'};
       }
       return {width: this.monsterHealth + '%'};
     },
-    playerBarStyles() {
+    playerBarStyles(): StylesOutput {
       if (this.playerHealth < 0) {
         return {width: '0%'};
       }
       return {width: this.playerHealth + '%'};
     },
-    mayUseSpecialAttack() {
+    mayUseSpecialAttack(): boolean {
       return this.currentRound % 3 !== 0;
     },
   },
   watch: {
-    playerHealth(value) {
+    playerHealth(value: number): void {
       if (value <= 0 && this.monsterHealth <= 0) {
         // A draw
         this.winner = 'draw';
@@ -91,7 +95,7 @@ export default defineComponent({
         this.winner = 'monster';
       }
     },
-    monsterHealth(value) {
+    monsterHealth(value: number): void {
       if (value <= 0 && this.playerHealth <= 0) {
         // A draw
         this.winner = 'draw';
@@ -102,33 +106,33 @@ export default defineComponent({
     },
   },
   methods: {
-    startGame() {
+    startGame(): void {
       this.playerHealth = 100;
       this.monsterHealth = 100;
       this.winner = null;
       this.currentRound = 0;
       this.logMessages = [];
     },
-    attackMonster() {
+    attackMonster(): void {
       this.currentRound++;
       const attackValue = getRandomValue(5, 12);
       this.monsterHealth -= attackValue;
       this.addLogMessage('player', 'attack', attackValue);
       this.attackPlayer();
     },
-    attackPlayer() {
+    attackPlayer(): void {
       const attackValue = getRandomValue(8, 15);
       this.playerHealth -= attackValue;
       this.addLogMessage('monster', 'attack', attackValue);
     },
-    specialAttackMonster() {
+    specialAttackMonster(): void {
       this.currentRound++;
       const attackValue = getRandomValue(10, 25);
       this.monsterHealth -= attackValue;
       this.addLogMessage('player', 'attack', attackValue);
       this.attackPlayer();
     },
-    healPlayer() {
+    healPlayer(): void {
       this.currentRound++;
       const healValue = getRandomValue(8, 20);
       if (this.playerHealth + healValue > 100) {
@@ -139,10 +143,10 @@ export default defineComponent({
       this.addLogMessage('player', 'heal', healValue);
       this.attackPlayer();
     },
-    surrender() {
+    surrender(): void {
       this.winner = 'monster';
     },
-    addLogMessage(who, what, value) {
+    addLogMessage(who: string, what: string, value: number) {
       this.logMessages.unshift({
         actionBy: who,
         actionType: what,
