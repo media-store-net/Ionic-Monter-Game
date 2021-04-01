@@ -1,14 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>
-          <header>
-            <h1>Monster Slayer</h1>
-          </header>
-        </ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <page-header title="Monster Slayer"></page-header>
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
@@ -25,17 +17,10 @@
 import {defineComponent} from 'vue';
 import {IonPage, IonHeader, IonToolbar, IonTitle, IonContent} from '@ionic/vue';
 import MonsterGame from "@/components/MonsterGame.vue";
+import PageHeader from "@/components/PageHeader.vue";
 
 export default defineComponent({
   name: 'Tab1',
-  components: {MonsterGame, IonHeader, IonToolbar, IonTitle, IonContent, IonPage}
+  components: {PageHeader, MonsterGame, IonHeader, IonToolbar, IonTitle, IonContent, IonPage},
 })
 </script>
-<style scoped>
-header {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 0.5rem;
-  color: #880017;
-  text-align: center;
-}
-</style>
