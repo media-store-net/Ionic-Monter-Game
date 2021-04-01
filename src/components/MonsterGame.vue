@@ -52,14 +52,13 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import getRandomValue from "../fn/getRandomValue";
-
-interface StylesOutput {
-  width: string;
-}
+import DataTypes from "@/interfaces/DataTypes";
+import StylesOutputType from "@/interfaces/StylesOutputType";
+import LogMessageType from "@/interfaces/LogMessageType";
 
 export default defineComponent({
   name: "MonsterGame",
-  data() {
+  data(): DataTypes {
     return {
       playerHealth: 100,
       monsterHealth: 100,
@@ -69,13 +68,13 @@ export default defineComponent({
     };
   },
   computed: {
-    monsterBarStyles(): StylesOutput {
+    monsterBarStyles(): StylesOutputType {
       if (this.monsterHealth < 0) {
         return {width: '0%'};
       }
       return {width: this.monsterHealth + '%'};
     },
-    playerBarStyles(): StylesOutput {
+    playerBarStyles(): StylesOutputType {
       if (this.playerHealth < 0) {
         return {width: '0%'};
       }
@@ -146,12 +145,13 @@ export default defineComponent({
     surrender(): void {
       this.winner = 'monster';
     },
-    addLogMessage(who: string, what: string, value: number) {
-      this.logMessages.unshift({
+    addLogMessage(who: string, what: string, value: number): void {
+      const message: LogMessageType = {
         actionBy: who,
         actionType: what,
         actionValue: value
-      });
+      }
+      this.logMessages.unshift(message);
     }
   },
 })
