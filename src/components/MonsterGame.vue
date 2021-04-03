@@ -20,12 +20,22 @@
       <button @click="startGame">Start New Game</button>
     </section>
     <section id="controls" v-else>
-      <button @click="attackMonster">ATTACK</button>
-      <button :disabled="mayUseSpecialAttack" @click="specialAttackMonster">
-        SPECIAL ATTACK
-      </button>
-      <button @click="healPlayer">HEAL</button>
-      <button @click="surrender">SURRENDER</button>
+      <ion-fab vertical="bottom" horizontal="end">
+        <ion-fab-button type="button" @click="attackMonster">
+          <ion-icon :icon="sendOutline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button type="button" :disabled="mayUseSpecialAttack" @click="specialAttackMonster">
+          <ion-icon :icon="rocketOutline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab vertical="bottom" horizontal="start">
+        <ion-fab-button type="button" @click="healPlayer">
+          <ion-icon :icon="heartCircleOutline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button type="button" @click="surrender">
+          <ion-icon :icon="logOutOutline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
     </section>
     <section id="log" class="container">
       <h2>Battle Log</h2>
@@ -51,6 +61,8 @@
 
 <script lang="ts">
 import {defineComponent} from 'vue';
+import {IonFab, IonFabButton, IonIcon} from '@ionic/vue';
+import {heartCircleOutline, rocketOutline, sendOutline, logOutOutline} from 'ionicons/icons'
 import getRandomValue from "../fn/getRandomValue";
 import DataTypes from "@/interfaces/DataTypes";
 import StylesOutputType from "@/interfaces/StylesOutputType";
@@ -58,8 +70,17 @@ import LogMessageType from "@/interfaces/LogMessageType";
 
 export default defineComponent({
   name: "MonsterGame",
+  components: {
+    IonIcon,
+    IonFab,
+    IonFabButton
+  },
   data(): DataTypes {
     return {
+      heartCircleOutline,
+      rocketOutline,
+      sendOutline,
+      logOutOutline,
       playerHealth: 100,
       monsterHealth: 100,
       currentRound: 0,
@@ -197,6 +218,16 @@ section {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+ion-fab {
+  margin-bottom: 3em;
+}
+ion-fab-button {
+  margin-bottom: 1em;
+  background-color: #88005b;
+  color: white;
+  border-radius: 50%;
 }
 
 button {
