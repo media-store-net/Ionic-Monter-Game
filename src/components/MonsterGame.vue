@@ -221,7 +221,7 @@ section {
 }
 
 ion-fab {
-  margin-bottom: 3em;
+  margin-bottom: 4em;
 }
 ion-fab-button {
   margin-bottom: 1em;
